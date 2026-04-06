@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolidStateDB — PostgreSQL Consulting & Database Expertise</title>
+  <meta name="description" content="PostgreSQL consulting, performance tuning, DBA services, and database architecture from engineers with over two decades of hands-on experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0D1B2A;
+      --ink-mid:    #2C3E50;
+      --ink-light:  #5A6A7A;
+      --ink-dim:    #8A9BAB;
+      --accent:     #1A56DB;
+      --accent-dim: #1446B8;
+      --accent-bg:  #EEF3FC;
+      --teal:       #0E9E8E;
+      --teal-bg:    #E6F7F5;
+      --border:     #DDE3EA;
+      --bg:         #FFFFFF;
+      --bg-alt:     #F7F9FB;
+      --bg-dark:    #0D1B2A;
+      --radius:     10px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink-mid);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 66px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-text {
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .nav-logo-text .light { font-weight: 500; color: var(--ink-light); }
+    .nav-logo-text .bold  { font-weight: 900; color: var(--accent); }
+    .nav-logo-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      background: var(--teal);
+      border-radius: 50%;
+      margin: 0 1px 2px 1px;
+      vertical-align: middle;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--ink-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); text-decoration: none; }
+    .nav-cta {
+      background: var(--accent) !important;
+      color: white !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent-dim) !important; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5.5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--ink-light);
+      max-width: 580px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 7rem 2rem 6rem;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::after {
+      display: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid rgba(26,86,219,0.2);
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.08rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 0.78rem 1.75rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent-dim); text-decoration: none; }
+    .btn-secondary {
+      border: 1.5px solid var(--border);
+      color: var(--ink-mid);
+      padding: 0.78rem 1.75rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* terminal card */
+    .hero-visual {
+      background: var(--bg-dark);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(13,27,42,0.18);
+    }
+    .terminal-bar {
+      background: #1A2D42;
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FEBC2E; }
+    .dot-g { background: #28C840; }
+    .terminal-title {
+      margin-left: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: #5A7A9A;
+    }
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.9;
+    }
+    .t-prompt { color: #0E9E8E; }
+    .t-cmd    { color: #E2E8F0; }
+    .t-out    { color: #64748B; }
+    .t-val    { color: #FFC107; }
+    .t-good   { color: #4ADE80; }
+    .t-bad    { color: #F87171; }
+    .t-comment{ color: #334D66; }
+
+    /* ── CREDIBILITY STRIP ── */
+    .cred-strip {
+      background: var(--ink);
+      padding: 1.75rem 2rem;
+    }
+    .cred-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .cred-item { text-align: center; padding: 0.5rem 1.5rem; }
+    .cred-num {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: white;
+      display: block;
+      line-height: 1;
+    }
+    .cred-num span { color: var(--teal); }
+    .cred-label {
+      font-size: 0.76rem;
+      color: #5A7A9A;
+      margin-top: 0.3rem;
+      letter-spacing: 0.03em;
+    }
+    .cred-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg-alt); }
+    .service-card-featured {
+      background: var(--bg);
+      border: 1.5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 2rem 2.25rem;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      transition: box-shadow 0.2s;
+    }
+    .service-card-featured:hover {
+      box-shadow: 0 4px 24px rgba(26,86,219,0.1);
+    }
+    .service-card-featured-left {
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card-featured .service-icon {
+      margin-bottom: 1.1rem;
+    }
+    .service-card-featured h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .service-card-featured .featured-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid rgba(26,86,219,0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      align-self: flex-start;
+    }
+    .service-card-featured p {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+    .service-card-featured .service-tags {
+      margin-top: 1.25rem;
+    }
+    .service-card-featured-right {
+      border-left: 1px solid var(--border);
+      padding-left: 2rem;
+    }
+    .health-check-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .health-check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: var(--ink-mid);
+      line-height: 1.5;
+    }
+    .health-check-item::before {
+      content: '✓';
+      color: var(--teal);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      margin-top: 0.1rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      border-color: rgba(26,86,219,0.35);
+      box-shadow: 0 4px 20px rgba(26,86,219,0.07);
+    }
+    .service-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-bg);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .service-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--accent);
+      fill: none; stroke-width: 1.8;
+    }
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.65rem;
+    }
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.1rem;
+    }
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.67rem;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid rgba(26,86,219,0.15);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    /* ── WHY US ── */
+    #why { background: var(--bg); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .why-points { display: flex; flex-direction: column; gap: 1.6rem; margin-top: 0.5rem; }
+    .why-point { display: flex; gap: 1rem; align-items: flex-start; }
+    .why-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid rgba(26,86,219,0.2);
+      border-radius: 5px;
+      padding: 0.2rem 0.5rem;
+      flex-shrink: 0;
+      margin-top: 0.25rem;
+    }
+    .why-point-text h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .why-point-text p {
+      font-size: 0.875rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+    }
+    .why-quote {
+      background: var(--ink);
+      border-radius: 14px;
+      padding: 2.5rem;
+      position: relative;
+    }
+    .why-quote::before {
+      content: '\201C';
+      font-size: 5rem;
+      line-height: 0.8;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: 1.25rem;
+      left: 1.5rem;
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+    .why-quote p {
+      font-size: 0.975rem;
+      color: #94A8BB;
+      line-height: 1.9;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .why-quote p + p { margin-top: 0.5rem; }
+    .why-quote-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--teal);
+      margin-top: 1.5rem;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── TEAM ── */
+    #team { background: var(--bg-alt); }
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .team-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+    .team-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .avatar {
+      width: 54px; height: 54px;
+      border-radius: 12px;
+      background: var(--accent-bg);
+      border: 2px solid rgba(26,86,219,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent);
+      flex-shrink: 0;
+      letter-spacing: -0.03em;
+    }
+    .team-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .team-role {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 0.15rem;
+    }
+    .team-current {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: var(--teal-bg);
+      color: var(--teal);
+      border: 1px solid rgba(14,158,142,0.2);
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 0.35rem;
+    }
+    .team-bio {
+      font-size: 0.875rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .team-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .team-highlight {
+      font-size: 0.82rem;
+      color: var(--ink-mid);
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+    .team-highlight::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 0.1rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-info p {
+      font-size: 1rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.9rem;
+      color: var(--ink-mid);
+    }
+    .contact-detail svg {
+      width: 18px; height: 18px;
+      stroke: var(--accent);
+      fill: none; stroke-width: 1.8;
+      flex-shrink: 0;
+    }
+    .contact-form {
+      background: var(--bg-alt);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 2.25rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-mid);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      padding: 0.7rem 0.9rem;
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-submit {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.82rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--accent-dim); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 2rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo-text {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: white;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .footer-logo-text .light { font-weight: 500; color: #4A6A8A; }
+    .footer-logo-text .bold  { font-weight: 900; color: var(--teal); }
+    .footer-logo-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      background: var(--teal);
+      border-radius: 50%;
+      margin: 0 1px 2px 1px;
+      vertical-align: middle;
+    }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #4A6A8A;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: #4A6A8A;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: white; text-decoration: none; }
+
+    /* ── AI SECTION ── */
+    #ai { background: var(--bg-alt); }
+    #ai h2 em { font-style: normal; color: var(--accent); }
+
+    .ai-intro {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.5rem;
+      max-width: 780px;
+    }
+    .ai-intro p {
+      font-size: 0.975rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+    .ai-intro p + p { margin-top: 0.75rem; }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .ai-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .ai-card:hover {
+      border-color: rgba(26,86,219,0.35);
+      box-shadow: 0 4px 20px rgba(26,86,219,0.07);
+    }
+    .ai-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.1rem;
+    }
+    .ai-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-bg);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ai-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--accent);
+    }
+    .ai-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--teal);
+      background: var(--teal-bg);
+      border: 1px solid rgba(14,158,142,0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+    .ai-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .ai-card p {
+      font-size: 0.875rem;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+    .ai-card p + p { margin-top: 0.65rem; }
+
+    .ai-note {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1rem;
+    }
+    .ai-note svg {
+      width: 18px; height: 18px;
+      stroke: var(--ink-dim);
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .ai-note p {
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+      line-height: 1.75;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-inner, .why-grid, .team-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card-featured { grid-template-columns: 1fr; }
+      .service-card-featured-right { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+      .hero-visual { display: none; }
+      #hero::after { display: none; }
+      .nav-links { display: none; }
+      .cred-divider { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-text">
+        <span class="light">Solid</span><span>State</span><span class="nav-logo-dot"></span><span class="bold">DB</span>
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#ai">AI &amp; Automation</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact" class="nav-cta">Talk to Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">PostgreSQL &amp; Database Consulting</span>
+      <h1>Deep database expertise,<br><em>no learning curve</em><br>on your time.</h1>
+      <p class="hero-sub">
+        We have spent over two decades working with databases — not just using them, but building infrastructure around them, tuning them at scale, and contributing to the PostgreSQL ecosystem. When you work with SolidStateDB, you get that depth from day one.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start a conversation</a>
+        <a href="#services" class="btn-secondary">What we do →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="terminal-bar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="terminal-title">production_diagnosis.sql</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-comment">-- What we typically find on a first look</span></div>
+        <br>
+        <div><span class="t-prompt">$</span> <span class="t-cmd">EXPLAIN (ANALYZE, BUFFERS)</span></div>
+        <div><span class="t-cmd">  SELECT * FROM orders</span></div>
+        <div><span class="t-cmd">  WHERE customer_id = $1;</span></div>
+        <br>
+        <div><span class="t-out">Seq Scan on orders</span></div>
+        <div><span class="t-bad">  Rows removed by filter: 4,821,903</span></div>
+        <div><span class="t-bad">  Execution: 3,847 ms</span></div>
+        <br>
+        <div><span class="t-comment">-- After: one missing index</span></div>
+        <div><span class="t-out">Index Scan using idx_orders_customer</span></div>
+        <div><span class="t-good">  Execution: 0.8 ms</span></div>
+        <br>
+        <div><span class="t-val">-- 4,800× improvement. Not uncommon.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CRED STRIP ══ -->
+<div class="cred-strip">
+  <div class="cred-inner">
+    <div class="cred-item">
+      <span class="cred-num"><span>40</span>+ yrs</span>
+      <div class="cred-label">combined PostgreSQL experience</div>
+    </div>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <span class="cred-num"><span>5</span>+</span>
+      <div class="cred-label">enterprise products shipped</div>
+    </div>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <span class="cred-num">All</span>
+      <div class="cred-label">clouds, on-prem &amp; Kubernetes</div>
+    </div>
+    <div class="cred-divider"></div>
+    <div class="cred-item">
+      <span class="cred-num"><span>EU</span></span>
+      <div class="cred-label">conference speakers across Europe</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="container">
+    <span class="section-label">What we do</span>
+    <h2>Services built around how<br>databases actually behave</h2>
+    <p class="section-sub">Every engagement starts with understanding your system — not applying a generic playbook to it.</p>
+    <!-- Featured: Health Check -->
+    <div class="service-card-featured">
+      <div class="service-card-featured-left">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <span class="featured-badge">Start here</span>
+        <h3>PostgreSQL Health Check</h3>
+        <p>Not sure where to begin? A health check gives you a clear picture of where your database stands — before committing to anything longer-term. We review your single node or cluster and deliver a written report with prioritised findings and specific next steps.</p>
+        <div class="service-tags">
+          <span class="tag">single node</span>
+          <span class="tag">cluster review</span>
+          <span class="tag">written report</span>
+          <span class="tag">fixed scope</span>
+        </div>
+      </div>
+      <div class="service-card-featured-right">
+        <div class="health-check-items">
+          <div class="health-check-item">Configuration audit — memory, parallelism, checkpoint, WAL</div>
+          <div class="health-check-item">Vacuum health and table bloat analysis</div>
+          <div class="health-check-item">Index usage and missing index identification</div>
+          <div class="health-check-item">Top queries by total time via pg_stat_statements</div>
+          <div class="health-check-item">Replication lag and standby status (if applicable)</div>
+          <div class="health-check-item">Connection handling and pool configuration review</div>
+          <div class="health-check-item">Prioritised findings with clear remediation steps</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2×2 grid -->
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Performance Tuning</h3>
+        <p>Query plans, index strategy, cost parameters, JIT, parallelism, vacuum tuning — the full picture. We read EXPLAIN ANALYZE output and tell you what's actually wrong, not what a configuration generator suggests.</p>
+        <div class="service-tags">
+          <span class="tag">EXPLAIN ANALYZE</span>
+          <span class="tag">pg_stat_statements</span>
+          <span class="tag">index strategy</span>
+          <span class="tag">autovacuum</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>DBA as a Service</h3>
+        <p>Ongoing database operations without the overhead of a full-time hire. Proactive monitoring, incident response, version upgrades, backup validation, and a direct line to engineers who know what they're looking at.</p>
+        <div class="service-tags">
+          <span class="tag">monitoring</span>
+          <span class="tag">incident response</span>
+          <span class="tag">backup &amp; recovery</span>
+          <span class="tag">major version upgrades</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+        </div>
+        <h3>Database Migrations</h3>
+        <p>Oracle to PostgreSQL, MySQL to PostgreSQL, cloud to on-prem, or on-prem to cloud. We handle schema conversion, data validation, and the edge cases automated tools miss — because we've seen what breaks in production.</p>
+        <div class="service-tags">
+          <span class="tag">Oracle → PG</span>
+          <span class="tag">MySQL → PG</span>
+          <span class="tag">cloud ↔ on-prem</span>
+          <span class="tag">zero-downtime</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Architecture &amp; HA Design</h3>
+        <p>High availability, replication topologies, Patroni, CloudNativePG, connection pooling, and distributed setups. We help you design for the failure modes you haven't encountered yet.</p>
+        <div class="service-tags">
+          <span class="tag">Patroni</span>
+          <span class="tag">CNPG</span>
+          <span class="tag">pgpool II</span>
+          <span class="tag">pgBouncer</span>
+          <span class="tag">pgEdge</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><path d="M2 12h2M20 12h2M12 2v2M12 20v2"/></svg>
+        </div>
+        <h3>24/7 Emergency Support</h3>
+        <p>Production incidents don't keep office hours. When your database is down or degraded, you need an engineer who can diagnose and act — not a ticketing queue. We offer direct emergency access for critical situations.</p>
+        <div class="service-tags">
+          <span class="tag">on-call access</span>
+          <span class="tag">incident response</span>
+          <span class="tag">production emergencies</span>
+          <span class="tag">direct engineer</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY US ══ -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <span class="section-label">Why SolidStateDB</span>
+        <h2>We've been inside the engine, not just driving it.</h2>
+        <p class="section-sub" style="margin-bottom:2rem;">
+          Most database consultants work with PostgreSQL. We've spent careers working on it — contributing features, shipping enterprise tooling, and running it in production across every major cloud and deployment model.
+        </p>
+        <div class="why-points">
+          <div class="why-point">
+            <span class="why-num">01</span>
+            <div class="why-point-text">
+              <h4>PostgreSQL community depth</h4>
+              <p>Decades of core infrastructure development in the PostgreSQL ecosystem — pgpool II, BART backup tooling, FDW architecture, replication, and more.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">02</span>
+            <div class="why-point-text">
+              <h4>Cloud and on-prem, without preference</h4>
+              <p>We know how RDS, Aurora, Aiven, and CloudNativePG differ from upstream PostgreSQL — and why those differences matter for your specific tuning and architecture decisions.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">03</span>
+            <div class="why-point-text">
+              <h4>We tell you what's actually wrong</h4>
+              <p>Not what a configuration generator recommends. We read query plans, study your workload pattern, and give you a specific diagnosis — not a checklist lifted from a blog post.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">04</span>
+            <div class="why-point-text">
+              <h4>Small team, direct access</h4>
+              <p>You work with the founders. No account managers, no junior engineers handed your problem. The people you talk to are the people doing the work.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-quote">
+        <p>There is a version of database consulting that is mostly about running a configuration generator and reading back the output. We have nothing against tools — we have built some ourselves.</p>
+        <p>But a query that takes 4 seconds on your system might take 4 milliseconds on a different storage type. A parameter change that every guide recommends can trigger a cascade of side effects your specific workload hits hard.</p>
+        <p>You only learn this after seeing enough systems fail in enough different ways. That is what we bring to the table.</p>
+        <span class="why-quote-label">— The SolidStateDB team</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AI SERVICES ══ -->
+<section id="ai">
+  <div class="container">
+    <span class="section-label">AI-Augmented Database Work</span>
+    <h2>Expert knowledge, now with<br><em>AI in the loop.</em></h2>
+    <p class="section-sub">
+      We are not an AI company. We are database engineers who use AI tooling the right way — to move faster, surface patterns earlier, and give you better answers. The judgement is still ours.
+    </p>
+
+    <div class="ai-intro">
+      <p>
+        The database world is changing. AI assistants are being asked to diagnose slow queries, review schemas, and suggest configuration changes. Most of them get it wrong — not because the models are bad, but because they lack grounded, accurate PostgreSQL knowledge at the point of inference.
+      </p>
+      <p>
+        We are building the infrastructure to fix that. And we are offering it as part of our consulting practice now.
+      </p>
+    </div>
+
+    <div class="ai-grid">
+
+      <div class="ai-card">
+        <div class="ai-card-header">
+          <div class="ai-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="ai-badge">MCP Integration</div>
+        </div>
+        <h3>PostgreSQL MCP Server</h3>
+        <p>
+          We set up and configure a PostgreSQL MCP (Model Context Protocol) server for your environment — letting AI assistants like Claude or Cursor connect directly to your database, read live query plans, inspect pg_stat_statements, and reason over real schema and performance data.
+        </p>
+        <p>
+          The result: your AI assistant stops guessing about your database and starts working with actual evidence.
+        </p>
+        <div class="service-tags" style="margin-top:1.25rem;">
+          <span class="tag">Model Context Protocol</span>
+          <span class="tag">Claude / Cursor</span>
+          <span class="tag">live schema access</span>
+          <span class="tag">query plan analysis</span>
+        </div>
+      </div>
+
+      <div class="ai-card">
+        <div class="ai-card-header">
+          <div class="ai-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="ai-badge">RAG</div>
+        </div>
+        <h3>Database Knowledge RAG</h3>
+        <p>
+          Generic AI models give generic database answers — often wrong for your specific PostgreSQL version, cloud provider, or workload. We build a retrieval-augmented generation layer grounded in accurate PostgreSQL documentation, your own runbooks, and curated expert knowledge.
+        </p>
+        <p>
+          Your team gets an AI assistant that actually knows your stack — not one that hallucinates pg_tune output.
+        </p>
+        <div class="service-tags" style="margin-top:1.25rem;">
+          <span class="tag">RAG pipeline</span>
+          <span class="tag">PG documentation corpus</span>
+          <span class="tag">custom runbooks</span>
+          <span class="tag">version-aware answers</span>
+        </div>
+      </div>
+
+      <div class="ai-card">
+        <div class="ai-card-header">
+          <div class="ai-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+          <div class="ai-badge">AI-Assisted</div>
+        </div>
+        <h3>AI-Assisted Performance Review</h3>
+        <p>
+          We combine our manual diagnosis with AI-powered pattern matching across your query history, wait events, and configuration drift. This lets us surface problems faster — not replace the engineer who knows what to do with them.
+        </p>
+        <p>
+          Think of it as a force multiplier: the same expert depth, with better visibility across your entire workload at once.
+        </p>
+        <div class="service-tags" style="margin-top:1.25rem;">
+          <span class="tag">query history analysis</span>
+          <span class="tag">wait event patterns</span>
+          <span class="tag">config drift detection</span>
+          <span class="tag">pg_stat_statements</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ai-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p>All AI-assisted work is reviewed and validated by our engineers before it reaches you. We have spent years benchmarking AI recommendations against real workloads — we know where they are reliable and where they are not.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-label">Get in touch</span>
+        <h2>Tell us what you're dealing with.</h2>
+        <p>Whether it's a specific performance problem, a migration you're planning, or you want a second opinion on your architecture — we're happy to have an honest conversation. No sales pitch, no obligation.</p>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@solidstatedb.com
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          solidstatedb.com
+        </div>
+      </div>
+      <div class="contact-form">
+        <form action="https://formspree.io/f/your-form-id" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="service">What are you looking for?</label>
+            <select id="service" name="service">
+              <option value="">Select a service…</option>
+              <option>PostgreSQL health check</option>
+              <option>Performance tuning</option>
+              <option>DBA as a service</option>
+              <option>Database migration</option>
+              <option>Architecture / HA design</option>
+              <option>24/7 emergency support</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell us about the problem</label>
+            <textarea id="message" name="message" placeholder="What database are you running, what environment, and what's the issue or goal?"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo-text">
+        <span class="light">Solid</span><span>State</span><span class="footer-logo-dot"></span><span class="bold">DB</span>
+      </div>
+      <div class="footer-copy" style="margin-top:0.3rem;">© 2026 SolidStateDB. All rights reserved.</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#ai">AI &amp; Automation</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
