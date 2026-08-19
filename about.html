@@ -1,11 +1,11 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Services — SolidStateDB</title>
+<title>About — SolidStateDB</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="description" content="PostgreSQL consulting services: health checks, performance tuning, DBA as a service, migrations, HA architecture, and 24/7 emergency support.">
+<meta name="description" content="Why SolidStateDB: two decades of PostgreSQL engineering, not just database administration — how we work and why it produces different answers.">
 <style>
   @font-face {
     font-family: 'Newsreader';
@@ -144,49 +144,47 @@
 
   /* ============ PAGE HEAD ============ */
   #page-head { padding: 4rem 0 3rem; border-bottom: 1px solid var(--rule); }
-  #page-head h1 { font-size: clamp(2rem, 4vw, 2.9rem); margin: 0.8rem 0 1rem; max-width: 18ch; }
-  #page-head p { color: var(--ink-soft); font-size: 1.05rem; max-width: 58ch; margin: 0; }
+  #page-head h1 { font-size: clamp(2rem, 4vw, 2.9rem); margin: 0.8rem 0 1rem; max-width: 20ch; }
+  #page-head p { color: var(--ink-soft); font-size: 1.05rem; max-width: 60ch; margin: 0; }
 
-  /* ============ SERVICE ENTRY ============ */
-  .service-entry { padding: 3.2rem 0; border-bottom: 1px solid var(--rule); }
-  .service-entry-head {
-    display: grid; grid-template-columns: 60px 1fr auto;
-    align-items: baseline; gap: 1.5rem; margin-bottom: 1.3rem;
+  /* ============ ARGUMENT — long-form running text ============ */
+  #argument { padding: 4rem 0; border-bottom: 1px solid var(--rule); }
+  .argument-grid { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; }
+  @media (max-width: 820px) { .argument-grid { grid-template-columns: 1fr; gap: 1rem; } }
+  .argument-label { font-family: 'Plex Mono', monospace; font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.04em; padding-top: 0.3rem; }
+  .argument-body { max-width: 66ch; }
+  .argument-body p { font-size: 1.02rem; color: var(--ink-soft); margin: 0 0 1.1rem; }
+  .argument-body p:last-child { margin-bottom: 0; }
+  .argument-body strong { color: var(--ink); font-weight: 600; }
+
+  /* ============ PRINCIPLES — numbered, running text not cards ============ */
+  #principles { padding: 4.5rem 0; border-bottom: 1px solid var(--rule); }
+  .principle { display: grid; grid-template-columns: 60px 1fr; gap: 1.5rem; padding: 1.8rem 0; border-top: 1px solid var(--rule); }
+  .principle:first-of-type { border-top: 1px solid var(--rule-strong); }
+  @media (max-width: 720px) { .principle { grid-template-columns: 1fr; gap: 0.5rem; } }
+  .principle-num { font-family: 'Plex Mono', monospace; font-size: 0.82rem; color: var(--ink-faint); padding-top: 0.2rem; }
+  .principle h3 { font-size: 1.15rem; margin: 0 0 0.6rem; }
+  .principle p { font-size: 0.95rem; color: var(--ink-soft); margin: 0; max-width: 62ch; }
+
+  /* ============ FIELD NOTE ============ */
+  #field-note { padding: 4rem 0; background: var(--paper-deep); border-bottom: 1px solid var(--rule); }
+  .field-note { max-width: 780px; }
+  .field-note p { font-family: 'Newsreader', serif; font-size: 1.4rem; font-style: italic; line-height: 1.6; color: var(--ink); margin: 0 0 1.2rem; }
+  .field-note-sig { font-family: 'Plex Mono', monospace; font-size: 0.74rem; color: var(--ink-faint); letter-spacing: 0.03em; }
+
+  /* ============ HOW WE WORK — practical process, not marketing ============ */
+  #process { padding: 4.5rem 0; border-bottom: 1px solid var(--rule); }
+  .process-row {
+    display: grid; grid-template-columns: 220px 1fr; gap: 2rem;
+    padding: 1.5rem 0; border-bottom: 1px solid var(--rule);
   }
-  .service-num { font-family: 'Plex Mono', monospace; font-size: 0.82rem; color: var(--ink-faint); }
-  .service-entry-head h2 { font-size: 1.55rem; margin: 0; }
-  .service-flag {
-    font-family: 'Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--brass-deep); white-space: nowrap;
-  }
-  .service-body {
-    display: grid; grid-template-columns: 60px 1fr 1fr; gap: 1.5rem;
-  }
-  @media (max-width: 800px) { .service-body { grid-template-columns: 1fr; } }
-  .service-body-spacer { display: none; }
-  @media (min-width: 801px) { .service-body-spacer { display: block; } }
-  .service-desc p { font-size: 0.98rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 52ch; }
-  .service-desc p:last-child { margin-bottom: 0; }
-  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; }
-  .tag {
-    font-family: 'Plex Mono', monospace; font-size: 0.67rem; color: var(--pine);
-    border: 1px solid var(--rule-strong); padding: 0.18rem 0.5rem;
-  }
-  .service-includes {
-    background: var(--paper-deep); border-left: 2px solid var(--brass);
-    padding: 1.2rem 1.4rem; font-size: 0.88rem; color: var(--ink-soft);
-    align-self: start;
-  }
-  .service-includes-label {
-    font-family: 'Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--ink-faint); margin-bottom: 0.6rem; display: block;
-  }
-  .service-includes ul { margin: 0; padding-left: 1.1rem; }
-  .service-includes li { margin-bottom: 0.4rem; }
-  .service-includes li:last-child { margin-bottom: 0; }
+  .process-row:last-child { border-bottom: none; }
+  @media (max-width: 720px) { .process-row { grid-template-columns: 1fr; gap: 0.5rem; } }
+  .process-row h4 { font-family: 'Plex Sans', sans-serif; font-weight: 600; font-size: 1rem; margin: 0; color: var(--ink); }
+  .process-row p { font-size: 0.92rem; color: var(--ink-soft); margin: 0; max-width: 60ch; }
 
   /* ============ CLOSING CTA ============ */
-  #cta { padding: 4.5rem 0; text-align: left; }
+  #cta { padding: 4.5rem 0; }
   #cta h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 0 0 1rem; }
   #cta p { color: var(--ink-soft); font-size: 1rem; max-width: 52ch; margin: 0 0 1.8rem; }
   .btn {
@@ -217,9 +215,9 @@
   </div>
   <div class="wrap masthead-nav">
     <ul class="n-links">
-      <li><a href="/services" class="current">Services</a></li>
+      <li><a href="/services">Services</a></li>
       <li><a href="/#ai">AI &amp; Automation</a></li>
-      <li><a href="/about">About</a></li>
+      <li><a href="/about" class="current">About</a></li>
     </ul>
     <a href="/#contact" class="n-cta">Talk to us →</a>
   </div>
@@ -227,171 +225,97 @@
 
 <section id="page-head">
   <div class="wrap">
-    <div class="eyebrow"><b>—</b> WHAT WE DO</div>
-    <h1>Work organised around how databases actually behave.</h1>
-    <p>Every engagement starts with understanding your system — not applying a generic playbook to it. Six services, each scoped to a specific kind of problem, all delivered by the people who do the work.</p>
+    <div class="eyebrow"><b>—</b> ABOUT SOLIDSTATEDB</div>
+    <h1>We've been inside the engine, not just driving it.</h1>
+    <p>Most database consultants work with PostgreSQL. We've spent careers working on it — and that difference shapes every answer we give.</p>
   </div>
 </section>
 
-<section id="services-list">
+<section id="argument">
+  <div class="wrap argument-grid">
+    <div class="argument-label">THE SHORT VERSION</div>
+    <div class="argument-body">
+      <p>There is a version of database consulting that is mostly about running a configuration generator and reading back the output. We have nothing against tools — we have built some ourselves. But a query that takes 4 seconds on your system might take 4 milliseconds on a different storage type, and a parameter change every guide recommends can trigger a cascade of side effects your specific workload hits hard.</p>
+      <p>You only learn this after seeing enough systems fail in enough different ways. <strong>That's the actual product we sell: pattern recognition built over two decades of hands-on PostgreSQL work</strong> — not a checklist, and not a generic best-practices document with your company name pasted at the top.</p>
+      <p>We work on the PostgreSQL ecosystem itself, not just against it as end users. That means the same instincts that go into core infrastructure work — pgpool II, backup tooling, replication internals — go into reading your specific system, too.</p>
+    </div>
+  </div>
+</section>
+
+<section id="principles">
   <div class="wrap">
+    <div class="eyebrow" style="margin-bottom: 2rem;"><b>—</b> HOW THIS SHOWS UP IN PRACTICE</div>
 
-    <div class="service-entry">
-      <div class="service-entry-head">
-        <span class="service-num">01</span>
-        <h2>PostgreSQL Health Check</h2>
-        <span class="service-flag">Start here</span>
-      </div>
-      <div class="service-body">
-        <div class="service-body-spacer"></div>
-        <div class="service-desc">
-          <p>Not sure where to begin? A fixed-scope review of your single node or cluster, delivered as a written report with prioritised findings and specific next steps — not a generic scorecard.</p>
-          <p>Most engagements start here. It gives you a clear, evidence-based picture of where your database actually stands before committing to anything longer-term, and it's scoped tightly enough to turn around fast.</p>
-          <div class="service-tags"><span class="tag">single node</span><span class="tag">cluster review</span><span class="tag">written report</span><span class="tag">fixed scope</span></div>
-        </div>
-        <div class="service-includes">
-          <span class="service-includes-label">What's covered</span>
-          <ul>
-            <li>Configuration audit — memory, parallelism, checkpoint, WAL</li>
-            <li>Vacuum health and table bloat analysis</li>
-            <li>Index usage and missing index identification</li>
-            <li>Top queries by total time via pg_stat_statements</li>
-            <li>Replication lag and standby status, if applicable</li>
-            <li>Connection handling and pool configuration review</li>
-          </ul>
-        </div>
+    <div class="principle">
+      <span class="principle-num">01</span>
+      <div>
+        <h3>PostgreSQL community depth</h3>
+        <p>Decades of core infrastructure development in the PostgreSQL ecosystem — pgpool II, BART backup tooling, FDW architecture, replication internals, and more. We're not reading the same documentation you are for the first time.</p>
       </div>
     </div>
 
-    <div class="service-entry">
-      <div class="service-entry-head">
-        <span class="service-num">02</span>
-        <h2>Performance Tuning</h2>
-        <span class="service-flag"></span>
-      </div>
-      <div class="service-body">
-        <div class="service-body-spacer"></div>
-        <div class="service-desc">
-          <p>Query plans, index strategy, cost parameters, JIT, parallelism, vacuum tuning — the full picture, not a single knob turned in isolation. We read EXPLAIN ANALYZE output and tell you what's actually wrong, not what a configuration generator suggests.</p>
-          <p>This is ongoing or project-based work, scoped to your actual workload — a write-heavy OLTP system and an analytics warehouse get tuned very differently, and we treat them that way.</p>
-          <div class="service-tags"><span class="tag">EXPLAIN ANALYZE</span><span class="tag">pg_stat_statements</span><span class="tag">index strategy</span><span class="tag">autovacuum</span></div>
-        </div>
-        <div class="service-includes">
-          <span class="service-includes-label">What's covered</span>
-          <ul>
-            <li>Query plan analysis on your slowest, highest-volume queries</li>
-            <li>Index design — including partial and expression indexes</li>
-            <li>Autovacuum and bloat control tuned to your write pattern</li>
-            <li>Connection pooling and cost-parameter calibration</li>
-          </ul>
-        </div>
+    <div class="principle">
+      <span class="principle-num">02</span>
+      <div>
+        <h3>Cloud and on-prem, without preference</h3>
+        <p>We know how RDS, Aurora, Aiven, and CloudNativePG differ from upstream PostgreSQL, and why those differences matter for your specific tuning and architecture decisions. A recommendation that's correct on bare metal can be wrong on managed infrastructure, and we won't hand you the wrong one because it's the one we know best.</p>
       </div>
     </div>
 
-    <div class="service-entry">
-      <div class="service-entry-head">
-        <span class="service-num">03</span>
-        <h2>DBA as a Service</h2>
-        <span class="service-flag"></span>
-      </div>
-      <div class="service-body">
-        <div class="service-body-spacer"></div>
-        <div class="service-desc">
-          <p>Ongoing database operations without the overhead of a full-time hire. Proactive monitoring, incident response, version upgrades, backup validation, and a direct line to engineers who know what they're looking at.</p>
-          <p>Built for teams that need real DBA coverage but don't have the volume of work to justify a dedicated headcount — or want senior-level oversight alongside an existing team.</p>
-          <div class="service-tags"><span class="tag">monitoring</span><span class="tag">incident response</span><span class="tag">backup &amp; recovery</span><span class="tag">major version upgrades</span></div>
-        </div>
-        <div class="service-includes">
-          <span class="service-includes-label">What's covered</span>
-          <ul>
-            <li>Proactive monitoring and alerting on the metrics that matter</li>
-            <li>Backup validation — not just backups existing, but restorable</li>
-            <li>Planned, tested major version upgrades</li>
-            <li>Incident response with a real engineer, not a ticket queue</li>
-          </ul>
-        </div>
+    <div class="principle">
+      <span class="principle-num">03</span>
+      <div>
+        <h3>We tell you what's actually wrong</h3>
+        <p>Not what a configuration generator recommends. We read query plans, study your workload pattern, and give a specific diagnosis grounded in your system — not a checklist lifted from a blog post that happened to rank well.</p>
       </div>
     </div>
 
-    <div class="service-entry">
-      <div class="service-entry-head">
-        <span class="service-num">04</span>
-        <h2>Database Migrations</h2>
-        <span class="service-flag"></span>
-      </div>
-      <div class="service-body">
-        <div class="service-body-spacer"></div>
-        <div class="service-desc">
-          <p>Oracle to PostgreSQL, MySQL to PostgreSQL, cloud to on-prem, or on-prem to cloud. We handle schema conversion, data validation, and the edge cases automated tools miss — because we've seen what breaks in production.</p>
-          <p>Migrations fail quietly, in the details a generic conversion tool doesn't know to check: sequence semantics, isolation-level differences, procedural code that doesn't translate cleanly. That's where we spend our time.</p>
-          <div class="service-tags"><span class="tag">Oracle → PG</span><span class="tag">MySQL → PG</span><span class="tag">cloud ↔ on-prem</span><span class="tag">zero-downtime</span></div>
-        </div>
-        <div class="service-includes">
-          <span class="service-includes-label">What's covered</span>
-          <ul>
-            <li>Schema and stored-procedure conversion</li>
-            <li>Data validation against the source system, not just row counts</li>
-            <li>Cutover planning, including zero-downtime approaches where feasible</li>
-          </ul>
-        </div>
+    <div class="principle">
+      <span class="principle-num">04</span>
+      <div>
+        <h3>Small team, direct access</h3>
+        <p>You work with the people doing the work. No account managers relaying your problem to someone else, no junior engineer learning on your production system. If something's unclear at 2am, you're talking to the person who can actually fix it.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="service-entry">
-      <div class="service-entry-head">
-        <span class="service-num">05</span>
-        <h2>Architecture &amp; HA Design</h2>
-        <span class="service-flag"></span>
-      </div>
-      <div class="service-body">
-        <div class="service-body-spacer"></div>
-        <div class="service-desc">
-          <p>High availability, replication topologies, Patroni, CloudNativePG, connection pooling, and distributed setups. We help you design for the failure modes you haven't encountered yet — not just the ones you have.</p>
-          <p>This spans greenfield architecture for a new system and hardening an existing one that's outgrown its original design assumptions.</p>
-          <div class="service-tags"><span class="tag">Patroni</span><span class="tag">CNPG</span><span class="tag">pgpool II</span><span class="tag">pgBouncer</span><span class="tag">pgEdge</span></div>
-        </div>
-        <div class="service-includes">
-          <span class="service-includes-label">What's covered</span>
-          <ul>
-            <li>Replication topology design and failover testing</li>
-            <li>Connection pooling strategy at scale</li>
-            <li>Kubernetes-native Postgres via CloudNativePG</li>
-          </ul>
-        </div>
-      </div>
+<section id="field-note">
+  <div class="wrap">
+    <blockquote class="field-note">
+      <p>"The hardest part of this work isn't knowing the PostgreSQL documentation — it's knowing which parts of it don't apply to your situation. Most advice online is written for an average system that doesn't exist. Ours is written after looking at yours."</p>
+      <span class="field-note-sig">— THE SOLIDSTATEDB TEAM</span>
+    </blockquote>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom: 2rem;"><b>—</b> WHAT WORKING WITH US LOOKS LIKE</div>
+
+    <div class="process-row">
+      <h4>We start with evidence, not assumptions</h4>
+      <p>Every engagement — even a quick one — starts by looking at what your system is actually doing: query plans, wait events, table statistics. We don't propose changes before we've seen the data that justifies them.</p>
     </div>
-
-    <div class="service-entry">
-      <div class="service-entry-head">
-        <span class="service-num">06</span>
-        <h2>24/7 Emergency Support</h2>
-        <span class="service-flag"></span>
-      </div>
-      <div class="service-body">
-        <div class="service-body-spacer"></div>
-        <div class="service-desc">
-          <p>Production incidents don't keep office hours. When your database is down or degraded, you need an engineer who can diagnose and act — not a ticketing queue. We offer direct emergency access for critical situations.</p>
-          <p>This is offered alongside our other services for existing clients, and as a standalone retainer for teams that just need a real escalation path when things go wrong.</p>
-          <div class="service-tags"><span class="tag">on-call access</span><span class="tag">incident response</span><span class="tag">production emergencies</span><span class="tag">direct engineer</span></div>
-        </div>
-        <div class="service-includes">
-          <span class="service-includes-label">What's covered</span>
-          <ul>
-            <li>Direct on-call access to a senior engineer</li>
-            <li>Live incident diagnosis and remediation</li>
-            <li>Post-incident write-up with root cause</li>
-          </ul>
-        </div>
-      </div>
+    <div class="process-row">
+      <h4>Fixed scope where it makes sense</h4>
+      <p>A health check is a fixed-scope engagement with a clear deliverable — you know what you're getting before you start. Ongoing work is scoped honestly too: we tell you when something is a quick fix and when it's a longer conversation.</p>
     </div>
-
+    <div class="process-row">
+      <h4>Findings in writing, not just a call</h4>
+      <p>You get a written record of what we found and what we recommend — something your team can act on without needing us in the room to explain it again.</p>
+    </div>
+    <div class="process-row">
+      <h4>No vendor lock-in to a tool</h4>
+      <p>Our recommendations are PostgreSQL-native where possible. We're not selling you a proprietary agent or dashboard you'll be stuck maintaining a relationship with — we're solving the problem in front of you.</p>
+    </div>
   </div>
 </section>
 
 <section id="cta">
   <div class="wrap">
-    <h2>Not sure which one fits?</h2>
-    <p>Most engagements start with a conversation, not a commitment. Tell us what you're dealing with and we'll point you at the right starting place — often the health check, sometimes not.</p>
+    <h2>Tell us what you're dealing with.</h2>
+    <p>No sales pitch, no obligation — just an honest read on whether we're the right fit for the problem.</p>
     <a href="/#contact" class="btn btn-solid">Talk to us →</a>
   </div>
 </section>

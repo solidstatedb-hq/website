@@ -278,20 +278,15 @@
   .teaser-more { font-family: 'Plex Mono', monospace; font-size: 0.85rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--brass); padding-bottom: 2px; }
   .teaser-more:hover { color: var(--brass-deep); }
 
-  /* ============ WHY — running text, not point cards ============ */
+  /* ============ WHY — short teaser, full version lives at /about ============ */
   #why { background: var(--paper-deep); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-  .why-columns { columns: 2; column-gap: 3.5rem; }
-  @media (max-width: 800px) { .why-columns { columns: 1; } }
-  .why-block { break-inside: avoid; margin-bottom: 1.9rem; }
-  .why-block h4 {
-    font-family: 'Plex Sans', sans-serif; font-weight: 600; font-size: 1rem; color: var(--ink);
-    margin: 0 0 0.4rem;
-    display: flex; align-items: baseline; gap: 0.6rem;
-  }
-  .why-block h4::before { content: '—'; color: var(--brass); }
-  .why-block p { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
+  .why-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 800px) { .why-teaser { grid-template-columns: 1fr; gap: 1.5rem; } }
+  .why-teaser p { font-size: 1rem; color: var(--ink-soft); margin: 0; max-width: 52ch; }
+  .why-more { font-family: 'Plex Mono', monospace; font-size: 0.85rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--brass); padding-bottom: 2px; display: inline-block; margin-top: 1.2rem; }
+  .why-more:hover { color: var(--brass-deep); }
 
-  .field-note { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--rule-strong); max-width: 760px; }
+  .field-note { max-width: 760px; }
   .field-note p { font-family: 'Newsreader', serif; font-size: 1.3rem; font-style: italic; line-height: 1.6; color: var(--ink); margin: 0 0 1rem; }
   .field-note-sig { font-family: 'Plex Mono', monospace; font-size: 0.74rem; color: var(--ink-faint); letter-spacing: 0.03em; }
 
@@ -362,7 +357,7 @@
     <ul class="n-links">
       <li><a href="/services">Services</a></li>
       <li><a href="#ai">AI &amp; Automation</a></li>
-      <li><a href="#why">Why Us</a></li>
+      <li><a href="/about">About</a></li>
     </ul>
     <a href="#contact" class="n-cta">Talk to us →</a>
   </div>
@@ -446,28 +441,15 @@
       <p>Most database consultants work with PostgreSQL. We've spent careers working on it.</p>
     </div>
 
-    <div class="why-columns">
-      <div class="why-block">
-        <h4>PostgreSQL community depth</h4>
-        <p>Decades of core infrastructure development in the PostgreSQL ecosystem — pgpool II, BART backup tooling, FDW architecture, replication, and more.</p>
+    <div class="why-teaser">
+      <div>
+        <p>Not what a configuration generator recommends. We read query plans, study your workload pattern, and give a specific diagnosis grounded in your system — built on decades of hands-on PostgreSQL engineering, not just database administration.</p>
+        <a href="/about" class="why-more">More about how we work →</a>
       </div>
-      <div class="why-block">
-        <h4>Cloud and on-prem, without preference</h4>
-        <p>We know how RDS, Aurora, Aiven, and CloudNativePG differ from upstream PostgreSQL — and why those differences matter for your specific tuning and architecture decisions.</p>
-      </div>
-      <div class="why-block">
-        <h4>We tell you what's actually wrong</h4>
-        <p>Not what a configuration generator recommends. We read query plans, study your workload pattern, and give a specific diagnosis — not a checklist lifted from a blog post.</p>
-      </div>
-      <div class="why-block">
-        <h4>Small team, direct access</h4>
-        <p>You work with the founders. No account managers, no junior engineers handed your problem. The people you talk to are the people doing the work.</p>
-      </div>
-    </div>
-
-    <div class="field-note">
-      <p>"There is a version of database consulting that is mostly about running a configuration generator and reading back the output. We have nothing against tools — we have built some ourselves. But a query that takes 4 seconds on your system might take 4 milliseconds on a different storage type, and a parameter change every guide recommends can trigger a cascade of side effects your specific workload hits hard. You only learn this after seeing enough systems fail in enough different ways. That is what we bring to the table."</p>
-      <span class="field-note-sig">— THE SOLIDSTATEDB TEAM</span>
+      <blockquote class="field-note">
+        <p>"You only learn what actually matters after seeing enough systems fail in enough different ways. That is what we bring to the table."</p>
+        <span class="field-note-sig">— THE SOLIDSTATEDB TEAM</span>
+      </blockquote>
     </div>
   </div>
 </section>
@@ -598,7 +580,7 @@
     <ul class="footer-links">
       <li><a href="/services">Services</a></li>
       <li><a href="#ai">AI &amp; Automation</a></li>
-      <li><a href="#why">Why Us</a></li>
+      <li><a href="/about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
