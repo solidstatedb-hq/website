@@ -1,11 +1,11 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>SolidStateDB</title>
+<title>AI &amp; Automation — SolidStateDB</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="description" content="PostgreSQL consulting from engineers with over two decades of hands-on database expertise — health checks, performance tuning, migrations, HA architecture, and AI-augmented database work.">
+<meta name="description" content="AI-augmented PostgreSQL work from SolidStateDB: MCP servers, grounded database knowledge retrieval, and AI-assisted performance review — always reviewed by engineers.">
 <style>
   @font-face {
     font-family: 'Newsreader';
@@ -56,7 +56,6 @@
     --pine:        #0F7A5C;
     --red:         #C21E3A;
   }
-
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --paper:       #0B0D10;
@@ -116,61 +115,90 @@
   .eyebrow b { color: var(--brass); font-weight: 500; }
 
   /* ============ MASTHEAD ============ */
-  header.masthead {
-    border-bottom: 1px solid var(--rule);
-  }
+  header.masthead { border-bottom: 1px solid var(--rule); }
   .masthead-top {
     display: flex; justify-content: space-between; align-items: baseline;
     padding: 1.6rem 0 1.4rem;
     border-bottom: 1px solid var(--rule);
   }
   .brand {
-    font-family: 'Newsreader', serif;
-    font-weight: 600;
-    font-size: 1.4rem;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    color: var(--ink);
+    font-family: 'Newsreader', serif; font-weight: 600; font-size: 1.4rem;
+    letter-spacing: -0.01em; text-decoration: none; color: var(--ink);
   }
   .brand em { color: var(--brass); font-style: italic; font-weight: 500; }
   .masthead-meta {
-    font-family: 'Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--ink-faint);
-    letter-spacing: 0.02em;
+    font-family: 'Plex Mono', monospace; font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.02em;
   }
-  .masthead-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.9rem 0;
-  }
+  .masthead-nav { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 0; }
   .masthead-nav .n-links { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
   .masthead-nav .n-links a {
     font-family: 'Plex Mono', monospace; font-size: 0.78rem; text-decoration: none; color: var(--ink-soft);
   }
   .masthead-nav .n-links a:hover { color: var(--brass); }
+  .masthead-nav .n-links a.current { color: var(--ink); border-bottom: 1px solid var(--brass); padding-bottom: 2px; }
   .masthead-nav .n-cta {
     font-family: 'Plex Mono', monospace; font-size: 0.78rem; text-decoration: none;
     color: var(--ink); border-bottom: 1px solid var(--brass); padding-bottom: 2px;
   }
   @media (max-width: 720px) { .masthead-nav .n-links { display: none; } }
 
-  /* ============ OPENING STATEMENT ============ */
-  #statement { padding: 4.5rem 0 3.5rem; }
-  .statement-kicker { margin-bottom: 1.6rem; }
-  h1.statement {
-    font-size: clamp(2rem, 4.4vw, 3.4rem);
-    line-height: 1.22;
-    max-width: 20ch;
-    margin: 0 0 2.2rem;
+  /* ============ PAGE HEAD ============ */
+  #page-head { padding: 4rem 0 3rem; border-bottom: 1px solid var(--rule); }
+  #page-head h1 { font-size: clamp(2rem, 4vw, 2.9rem); margin: 0.8rem 0 1rem; max-width: 20ch; }
+  #page-head p { color: var(--ink-soft); font-size: 1.05rem; max-width: 60ch; margin: 0 0 0.9rem; }
+  #page-head p:last-child { margin-bottom: 0; }
+
+  /* ============ SERVICE ENTRY (reused pattern from /services) ============ */
+  .service-entry { padding: 3.2rem 0; border-bottom: 1px solid var(--rule); }
+  .service-entry-head {
+    display: grid; grid-template-columns: 60px 1fr auto;
+    align-items: baseline; gap: 1.5rem; margin-bottom: 1.3rem;
   }
-  h1.statement em { color: var(--brass); font-style: italic; }
-  .statement-body {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem;
-    padding-top: 2rem; border-top: 1px solid var(--rule);
+  .service-num { font-family: 'Plex Mono', monospace; font-size: 0.82rem; color: var(--ink-faint); }
+  .service-entry-head h2 { font-size: 1.55rem; margin: 0; }
+  .service-flag {
+    font-family: 'Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--brass-deep); white-space: nowrap;
   }
-  @media (max-width: 800px) { .statement-body { grid-template-columns: 1fr; gap: 1.5rem; } }
-  .statement-body p { font-size: 1.05rem; color: var(--ink-soft); margin: 0; }
-  .statement-actions { display: flex; gap: 1rem; margin-top: 2.2rem; flex-wrap: wrap; }
+  .service-body { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 1.5rem; }
+  @media (max-width: 800px) { .service-body { grid-template-columns: 1fr; } }
+  .service-body-spacer { display: none; }
+  @media (min-width: 801px) { .service-body-spacer { display: block; } }
+  .service-desc p { font-size: 0.98rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 52ch; }
+  .service-desc p:last-child { margin-bottom: 0; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; }
+  .tag {
+    font-family: 'Plex Mono', monospace; font-size: 0.67rem; color: var(--pine);
+    border: 1px solid var(--rule-strong); padding: 0.18rem 0.5rem;
+  }
+  .service-includes {
+    background: var(--paper-deep); border-left: 2px solid var(--brass);
+    padding: 1.2rem 1.4rem; font-size: 0.88rem; color: var(--ink-soft);
+    align-self: start;
+  }
+  .service-includes-label {
+    font-family: 'Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 0.6rem; display: block;
+  }
+  .service-includes ul { margin: 0; padding-left: 1.1rem; }
+  .service-includes li { margin-bottom: 0.4rem; }
+  .service-includes li:last-child { margin-bottom: 0; }
+
+  /* ============ BOUNDARIES — honest limits, not a features list ============ */
+  #boundaries { background: var(--paper-deep); border-bottom: 1px solid var(--rule); padding: 4rem 0; }
+  .boundary-row {
+    display: grid; grid-template-columns: 220px 1fr; gap: 2rem;
+    padding: 1.4rem 0; border-bottom: 1px solid var(--rule);
+  }
+  .boundary-row:last-child { border-bottom: none; }
+  @media (max-width: 720px) { .boundary-row { grid-template-columns: 1fr; gap: 0.5rem; } }
+  .boundary-row h4 { font-family: 'Plex Sans', sans-serif; font-weight: 600; font-size: 1rem; margin: 0; color: var(--ink); }
+  .boundary-row p { font-size: 0.92rem; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  /* ============ CLOSING CTA ============ */
+  #cta { padding: 4.5rem 0; }
+  #cta h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 0 0 1rem; }
+  #cta p { color: var(--ink-soft); font-size: 1rem; max-width: 52ch; margin: 0 0 1.8rem; }
   .btn {
     font-family: 'Plex Mono', monospace; font-size: 0.82rem; text-decoration: none;
     padding: 0.8rem 1.4rem; border: 1px solid var(--ink); display: inline-block;
@@ -178,162 +206,6 @@
   }
   .btn-solid { background: var(--ink); color: var(--paper); }
   .btn-solid:hover { background: var(--brass-deep); border-color: var(--brass-deep); }
-  .btn-line { background: transparent; color: var(--ink); border-color: var(--rule-strong); }
-  .btn-line:hover { border-color: var(--brass); color: var(--brass-deep); }
-
-  /* ============ EXHIBIT: real diagnostic document ============ */
-  #exhibit { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: var(--paper-deep); padding: 3.5rem 0; }
-  .exhibit-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.8rem; flex-wrap: wrap; gap: 0.5rem; }
-  .exhibit-head h2 { font-size: 1.3rem; margin: 0; }
-  .exhibit-file { font-family: 'Plex Mono', monospace; font-size: 0.76rem; color: var(--ink-faint); }
-  .exhibit-doc {
-    background: var(--paper); border: 1px solid var(--rule-strong);
-  }
-  .exhibit-row {
-    display: grid; grid-template-columns: 200px 1fr 160px;
-    border-bottom: 1px solid var(--rule);
-    font-family: 'Plex Mono', monospace; font-size: 0.86rem;
-  }
-  .exhibit-row:last-child { border-bottom: none; }
-  .exhibit-row > div { padding: 0.95rem 1.3rem; }
-  .exhibit-row .k { color: var(--ink-faint); border-right: 1px solid var(--rule); }
-  .exhibit-row .v { color: var(--ink); border-right: 1px solid var(--rule); }
-  .exhibit-row .n { text-align: right; font-weight: 500; }
-  .exhibit-row .n.bad { color: var(--red); }
-  .exhibit-row .n.good { color: var(--pine); }
-  .exhibit-row.total { background: var(--paper-deep); }
-  .exhibit-row.total .n { font-size: 1.15rem; color: var(--pine); }
-  @media (max-width: 640px) {
-    .exhibit-row { grid-template-columns: 1fr; }
-    .exhibit-row .k, .exhibit-row .v { border-right: none; border-bottom: 1px dashed var(--rule); }
-    .exhibit-row .n { text-align: left; }
-  }
-  .exhibit-caption { font-size: 0.86rem; color: var(--ink-soft); margin-top: 1.2rem; max-width: 62ch; }
-
-  /* ============ SECTION SHELL ============ */
-  section { padding: 4.5rem 0; }
-  .section-num { font-family: 'Plex Mono', monospace; font-size: 0.72rem; color: var(--ink-faint); margin-bottom: 0.6rem; }
-  .section-head { max-width: 680px; margin-bottom: 2.6rem; }
-  .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin: 0 0 0.8rem; }
-  .section-head p { color: var(--ink-soft); font-size: 1rem; max-width: 56ch; margin: 0; }
-
-  /* ============ SERVICES — index/table of contents, not cards ============ */
-  #services { border-top: 1px solid var(--rule); }
-  .index-list { border-top: 1px solid var(--rule-strong); }
-  .index-item {
-    display: grid; grid-template-columns: 60px 1fr auto;
-    align-items: baseline;
-    gap: 1.5rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--rule);
-    cursor: default;
-  }
-  .index-num { font-family: 'Plex Mono', monospace; font-size: 0.82rem; color: var(--ink-faint); padding-top: 0.3rem; }
-  .index-main h3 { font-family: 'Plex Sans', sans-serif; font-weight: 600; font-size: 1.12rem; margin: 0 0 0.5rem; color: var(--ink); }
-  .index-main p { font-size: 0.92rem; color: var(--ink-soft); margin: 0 0 0.7rem; max-width: 62ch; }
-  .index-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tag {
-    font-family: 'Plex Mono', monospace; font-size: 0.67rem; color: var(--pine);
-    border: 1px solid var(--rule-strong); padding: 0.18rem 0.5rem;
-  }
-  .index-flag {
-    font-family: 'Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--brass-deep); white-space: nowrap; padding-top: 0.35rem;
-  }
-  @media (max-width: 640px) {
-    .index-item { grid-template-columns: 1fr; gap: 0.4rem; }
-    .index-flag { order: -1; }
-  }
-
-  .index-detail {
-    margin-top: 0.9rem;
-    padding: 1.2rem 1.4rem;
-    background: var(--paper-deep);
-    border-left: 2px solid var(--brass);
-    font-size: 0.88rem;
-    color: var(--ink-soft);
-    display: none;
-  }
-  .index-item.featured .index-detail { display: block; }
-  .index-detail ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
-  .index-detail li { margin-bottom: 0.35rem; }
-
-  /* ============ SERVICES TEASER (homepage only — full list lives at /services) ======= */
-  .teaser-list { border-top: 1px solid var(--rule-strong); margin-bottom: 2rem; }
-  .teaser-item {
-    display: grid; grid-template-columns: 60px 1fr auto;
-    align-items: baseline; gap: 1.5rem; padding: 1.3rem 0; border-bottom: 1px solid var(--rule);
-  }
-  .teaser-num { font-family: 'Plex Mono', monospace; font-size: 0.82rem; color: var(--ink-faint); }
-  .teaser-item h3 { font-family: 'Plex Sans', sans-serif; font-weight: 600; font-size: 1.05rem; margin: 0 0 0.35rem; color: var(--ink); }
-  .teaser-item p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; max-width: 58ch; }
-  .teaser-flag {
-    font-family: 'Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--brass-deep); white-space: nowrap;
-  }
-  @media (max-width: 640px) {
-    .teaser-item { grid-template-columns: 1fr; gap: 0.3rem; }
-    .teaser-flag { order: -1; }
-  }
-  .teaser-more { font-family: 'Plex Mono', monospace; font-size: 0.85rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--brass); padding-bottom: 2px; }
-  .teaser-more:hover { color: var(--brass-deep); }
-
-  /* ============ WHY — short teaser, full version lives at /about ============ */
-  #why { background: var(--paper-deep); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-  .why-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-  @media (max-width: 800px) { .why-teaser { grid-template-columns: 1fr; gap: 1.5rem; } }
-  .why-teaser p { font-size: 1rem; color: var(--ink-soft); margin: 0; max-width: 52ch; }
-  .why-more { font-family: 'Plex Mono', monospace; font-size: 0.85rem; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--brass); padding-bottom: 2px; display: inline-block; margin-top: 1.2rem; }
-  .why-more:hover { color: var(--brass-deep); }
-
-  .field-note { max-width: 760px; }
-  .field-note p { font-family: 'Newsreader', serif; font-size: 1.3rem; font-style: italic; line-height: 1.6; color: var(--ink); margin: 0 0 1rem; }
-  .field-note-sig { font-family: 'Plex Mono', monospace; font-size: 0.74rem; color: var(--ink-faint); letter-spacing: 0.03em; }
-
-  /* ============ AI ============ */
-  #ai .section-head { margin-bottom: 2.2rem; }
-  .ai-lede { max-width: 760px; margin-bottom: 2.8rem; }
-  .ai-lede p { color: var(--ink-soft); font-size: 1rem; margin: 0 0 0.85rem; }
-  .ai-index { border-top: 1px solid var(--rule-strong); }
-  .ai-row {
-    display: grid; grid-template-columns: 220px 1fr;
-    gap: 2rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  @media (max-width: 720px) { .ai-row { grid-template-columns: 1fr; gap: 0.5rem; } }
-  .ai-row-label { font-family: 'Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass-deep); }
-  .ai-row h3 { font-family: 'Plex Sans', sans-serif; font-weight: 600; font-size: 1.02rem; margin: 0.4rem 0 0.6rem; color: var(--ink); }
-  .ai-row-body p { font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 0.6rem; }
-  .ai-note { font-size: 0.85rem; color: var(--ink-faint); margin-top: 1.6rem; max-width: 62ch; }
-
-  /* ============ CLOSING / CONTACT ============ */
-  #contact { border-top: 1px solid var(--rule); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; gap: 2.2rem; } }
-  .contact-info p { color: var(--ink-soft); font-size: 1.02rem; max-width: 46ch; margin: 0 0 1.8rem; }
-  .contact-line {
-    font-family: 'Plex Mono', monospace; font-size: 0.88rem; padding: 0.65rem 0;
-    border-bottom: 1px dashed var(--rule-strong); display: flex; justify-content: space-between; max-width: 360px;
-  }
-  .contact-line .k { color: var(--ink-faint); }
-
-  form.card-form { border: 1px solid var(--rule-strong); padding: 2rem; }
-  .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media (max-width: 520px) { .f-row { grid-template-columns: 1fr; } }
-  .f-group { margin-bottom: 1.2rem; }
-  .f-group label { display: block; font-family: 'Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.4rem; }
-  .f-group input, .f-group textarea, .f-group select {
-    width: 100%; background: var(--paper); border: 1px solid var(--rule-strong); padding: 0.65rem 0.75rem;
-    font-family: 'Plex Sans', sans-serif; font-size: 0.92rem; color: var(--ink); outline: none; transition: border-color .15s;
-  }
-  .f-group input:focus, .f-group textarea:focus, .f-group select:focus { border-color: var(--brass); }
-  .f-group textarea { resize: vertical; min-height: 100px; }
-  .btn-submit {
-    width: 100%; background: var(--ink); color: var(--paper); border: none;
-    font-family: 'Plex Mono', monospace; font-size: 0.85rem; letter-spacing: 0.03em; padding: 0.85rem; cursor: pointer; transition: background .15s;
-  }
-  .btn-submit:hover { background: var(--brass-deep); }
 
   /* ============ FOOTER ============ */
   footer { padding: 2rem 0; border-top: 1px solid var(--rule); }
@@ -356,211 +228,124 @@
   <div class="wrap masthead-nav">
     <ul class="n-links">
       <li><a href="/services">Services</a></li>
-      <li><a href="/ai">AI &amp; Automation</a></li>
+      <li><a href="/ai" class="current">AI &amp; Automation</a></li>
       <li><a href="/about">About</a></li>
     </ul>
-    <a href="#contact" class="n-cta">Talk to us →</a>
+    <a href="/#contact" class="n-cta">Talk to us →</a>
   </div>
 </header>
 
-<section id="statement">
+<section id="page-head">
   <div class="wrap">
-    <div class="statement-kicker eyebrow"><b>—</b> POSTGRESQL &amp; DATABASE CONSULTING</div>
-    <h1 class="statement">Deep database expertise, <em>no</em> learning curve on your time.</h1>
-    <div class="statement-body">
-      <p>We have spent over two decades working with databases — not just using them, but building infrastructure around them, tuning them at scale, and contributing to the PostgreSQL ecosystem itself.</p>
-      <p>When you work with SolidStateDB, you get that depth from day one: no ramp-up, no generic playbook, no junior engineer learning on your system. Just people who have already seen your problem before.</p>
+    <div class="eyebrow"><b>—</b> AI-AUGMENTED DATABASE WORK</div>
+    <h1>Expert knowledge, now with AI in the loop.</h1>
+    <p>We are not an AI company. We are database engineers who use AI tooling the right way — to move faster, surface patterns earlier, and give you better answers. The judgement is still ours.</p>
+    <p>The database world is changing. AI assistants are being asked to diagnose slow queries, review schemas, and suggest configuration changes. Most of them get it wrong — not because the models are bad, but because they lack grounded, accurate PostgreSQL knowledge at the point of inference. We're building the infrastructure to fix that, and offering it as part of our consulting practice now.</p>
+  </div>
+</section>
+
+<section id="offerings">
+  <div class="wrap">
+
+    <div class="service-entry">
+      <div class="service-entry-head">
+        <span class="service-num">01</span>
+        <h2>PostgreSQL MCP Server</h2>
+        <span class="service-flag">MCP</span>
+      </div>
+      <div class="service-body">
+        <div class="service-body-spacer"></div>
+        <div class="service-desc">
+          <p>We set up and configure a PostgreSQL MCP (Model Context Protocol) server for your environment — letting AI assistants like Claude or Cursor connect directly to your database, read live query plans, and inspect pg_stat_statements.</p>
+          <p>The result: your AI assistant stops guessing about your database and starts working with actual evidence — the same query plans and statistics we'd look at ourselves, not a general impression of what a database "usually" looks like.</p>
+          <div class="service-tags"><span class="tag">Model Context Protocol</span><span class="tag">Claude / Cursor</span><span class="tag">live schema access</span></div>
+        </div>
+        <div class="service-includes">
+          <span class="service-includes-label">What's covered</span>
+          <ul>
+            <li>Scoped, read-only access — the assistant sees what it needs, nothing more</li>
+            <li>Configuration for your specific PostgreSQL version and extensions</li>
+            <li>Guidance on what to ask it, and where its answers still need a human check</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="statement-actions">
-      <a href="#contact" class="btn btn-solid">Start a conversation →</a>
-      <a href="/services" class="btn btn-line">What we do</a>
+
+    <div class="service-entry">
+      <div class="service-entry-head">
+        <span class="service-num">02</span>
+        <h2>Database Knowledge RAG</h2>
+        <span class="service-flag">RAG</span>
+      </div>
+      <div class="service-body">
+        <div class="service-body-spacer"></div>
+        <div class="service-desc">
+          <p>Generic AI models give generic database answers — often wrong for your specific PostgreSQL version, cloud provider, or workload. We build a retrieval-augmented generation layer grounded in accurate PostgreSQL documentation, your own runbooks, and curated expert knowledge.</p>
+          <p>Your team gets an assistant that actually knows your stack — not one that hallucinates a pg_tune-style recommendation that happens to be wrong for your major version or your managed-cloud provider's specific limitations.</p>
+          <div class="service-tags"><span class="tag">RAG pipeline</span><span class="tag">PG documentation corpus</span><span class="tag">custom runbooks</span><span class="tag">version-aware answers</span></div>
+        </div>
+        <div class="service-includes">
+          <span class="service-includes-label">What's covered</span>
+          <ul>
+            <li>A retrieval index built from official docs plus your internal runbooks</li>
+            <li>Answers scoped to your actual PostgreSQL version and platform</li>
+            <li>Ongoing updates as your environment and the documentation change</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-entry">
+      <div class="service-entry-head">
+        <span class="service-num">03</span>
+        <h2>AI-Assisted Performance Review</h2>
+        <span class="service-flag">Assisted</span>
+      </div>
+      <div class="service-body">
+        <div class="service-body-spacer"></div>
+        <div class="service-desc">
+          <p>We combine our manual diagnosis with AI-powered pattern matching across your query history, wait events, and configuration drift. This lets us surface problems faster — not replace the engineer who knows what to do with them.</p>
+          <p>Think of it as a force multiplier: the same expert depth, with better visibility across your entire workload at once — useful when the volume of queries or the number of instances makes manual review alone too slow.</p>
+          <div class="service-tags"><span class="tag">query history analysis</span><span class="tag">wait event patterns</span><span class="tag">config drift detection</span></div>
+        </div>
+        <div class="service-includes">
+          <span class="service-includes-label">What's covered</span>
+          <ul>
+            <li>Automated pattern detection across pg_stat_statements history</li>
+            <li>Drift alerts when configuration diverges from an agreed baseline</li>
+            <li>A human engineer reviews and prioritises what the pattern matching surfaces</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="boundaries">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom: 2rem;"><b>—</b> WHERE WE DRAW THE LINE</div>
+
+    <div class="boundary-row">
+      <h4>AI proposes, an engineer decides</h4>
+      <p>Every AI-assisted recommendation is reviewed by one of us before it reaches you. We don't relay a model's output as-is — if we wouldn't sign off on it ourselves, it doesn't go out under our name.</p>
+    </div>
+    <div class="boundary-row">
+      <h4>We know where models are unreliable</h4>
+      <p>We've spent time benchmarking AI recommendations against real workloads. Some of it holds up; a meaningful amount doesn't, especially anything touching write-path parameters, replication behaviour, or version-specific quirks. We tell you which is which rather than presenting all of it with equal confidence.</p>
+    </div>
+    <div class="boundary-row">
+      <h4>Read-only access by default</h4>
+      <p>Any AI tooling we set up against your database defaults to read-only, scoped access. If a change needs to happen, a person makes that call and applies it — not an autonomous process against your production system.</p>
     </div>
   </div>
 </section>
 
-<section id="exhibit" style="padding-top:0;">
+<section id="cta">
   <div class="wrap">
-    <div class="exhibit-head">
-      <h2>A first look, typically.</h2>
-      <span class="exhibit-file">FROM A RECENT HEALTH CHECK — orders_by_customer</span>
-    </div>
-    <div class="exhibit-doc">
-      <div class="exhibit-row"><div class="k">Query plan (before)</div><div class="v">Seq Scan on orders</div><div class="n bad">3,847 ms</div></div>
-      <div class="exhibit-row"><div class="k">Rows filtered</div><div class="v">Full table scan, no matching index</div><div class="n bad">4,821,903</div></div>
-      <div class="exhibit-row"><div class="k">Fix applied</div><div class="v">CREATE INDEX idx_orders_customer</div><div class="n">—</div></div>
-      <div class="exhibit-row"><div class="k">Query plan (after)</div><div class="v">Index Scan using idx_orders_customer</div><div class="n good">0.8 ms</div></div>
-      <div class="exhibit-row total"><div class="k">Net result</div><div class="v">One missing index, found on day one</div><div class="n">4,800×</div></div>
-    </div>
-    <p class="exhibit-caption">This is not a hypothetical. It is close to the median finding on a first health check: a workload that has grown past the indexes it started with, quietly costing seconds per request nobody has measured yet.</p>
-  </div>
-</section>
-
-<section id="services">
-  <div class="wrap">
-    <div class="section-num eyebrow">01 — SERVICES</div>
-    <div class="section-head">
-      <h2>Work organised around how databases actually behave</h2>
-      <p>Every engagement starts with understanding your system — not applying a generic playbook to it.</p>
-    </div>
-
-    <div class="teaser-list">
-      <div class="teaser-item">
-        <span class="teaser-num">01</span>
-        <div>
-          <h3>PostgreSQL Health Check</h3>
-          <p>A fixed-scope review of your single node or cluster, delivered as a written report with prioritised findings and specific next steps.</p>
-        </div>
-        <span class="teaser-flag">Start here</span>
-      </div>
-      <div class="teaser-item">
-        <span class="teaser-num">02</span>
-        <div>
-          <h3>Performance Tuning</h3>
-          <p>We read EXPLAIN ANALYZE output and tell you what's actually wrong — not what a generator suggests.</p>
-        </div>
-        <span class="teaser-flag"></span>
-      </div>
-      <div class="teaser-item">
-        <span class="teaser-num">04</span>
-        <div>
-          <h3>Database Migrations</h3>
-          <p>Oracle, MySQL, cloud, or on-prem — schema conversion and the edge cases automated tools miss.</p>
-        </div>
-        <span class="teaser-flag"></span>
-      </div>
-    </div>
-    <a href="/services" class="teaser-more">All seven services →</a>
-  </div>
-</section>
-
-<section id="why">
-  <div class="wrap">
-    <div class="section-num eyebrow">02 — WHY SOLIDSTATEDB</div>
-    <div class="section-head">
-      <h2>We've been inside the engine, not just driving it.</h2>
-      <p>Most database consultants work with PostgreSQL. We've spent careers working on it.</p>
-    </div>
-
-    <div class="why-teaser">
-      <div>
-        <p>Not what a configuration generator recommends. We read query plans, study your workload pattern, and give a specific diagnosis grounded in your system — built on decades of hands-on PostgreSQL engineering, not just database administration.</p>
-        <a href="/about" class="why-more">More about how we work →</a>
-      </div>
-      <blockquote class="field-note">
-        <p>"You only learn what actually matters after seeing enough systems fail in enough different ways. That is what we bring to the table."</p>
-        <span class="field-note-sig">— THE SOLIDSTATEDB TEAM</span>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
-<section id="ai">
-  <div class="wrap">
-    <div class="section-num eyebrow">03 — AI-AUGMENTED WORK</div>
-    <div class="section-head">
-      <h2>Expert knowledge, now with AI in the loop.</h2>
-      <p>We are not an AI company. We are database engineers who use AI tooling the right way — to move faster, surface patterns earlier, and give you better answers. The judgement is still ours.</p>
-    </div>
-
-    <div class="teaser-list">
-      <div class="teaser-item">
-        <span class="teaser-num">01</span>
-        <div>
-          <h3>PostgreSQL MCP Server</h3>
-          <p>Letting AI assistants like Claude or Cursor connect directly to your database, read live query plans, and inspect pg_stat_statements.</p>
-        </div>
-        <span class="teaser-flag"></span>
-      </div>
-      <div class="teaser-item">
-        <span class="teaser-num">02</span>
-        <div>
-          <h3>Database Knowledge RAG</h3>
-          <p>A retrieval layer grounded in accurate documentation and your own runbooks — not generic, version-blind answers.</p>
-        </div>
-        <span class="teaser-flag"></span>
-      </div>
-    </div>
-    <a href="/ai" class="teaser-more">All AI &amp; automation work →</a>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="section-num eyebrow">04 — GET IN TOUCH</div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h2 style="margin:0 0 1.1rem;">Tell us what you're dealing with.</h2>
-        <p>Whether it's a specific performance problem, a migration you're planning, or you want a second opinion on your architecture — we're happy to have an honest conversation. No sales pitch, no obligation.</p>
-        <div class="contact-line"><span class="k">EMAIL</span><span>info@solidstatedb.com</span></div>
-        <div class="contact-line"><span class="k">WEB</span><span>www.solidstatedb.com</span></div>
-      </div>
-      <form class="card-form" id="contact-form">
-        <div class="f-row">
-          <div class="f-group"><label for="name">Your name</label><input type="text" id="name" name="name" placeholder="Jane Smith" required></div>
-          <div class="f-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="jane@company.com" required></div>
-        </div>
-        <div class="f-group">
-          <label for="service">What are you looking for?</label>
-          <select id="service" name="service">
-            <option value="">Select a service…</option>
-            <option>PostgreSQL health check</option>
-            <option>Performance tuning</option>
-            <option>DBA as a service</option>
-            <option>Database migration</option>
-            <option>Architecture / HA design</option>
-            <option>24/7 emergency support</option>
-            <option>Automated tuning &amp; index recommendations</option>
-            <option>Something else</option>
-          </select>
-        </div>
-        <div class="f-group">
-          <label for="message">Tell us about the problem</label>
-          <textarea id="message" name="message" placeholder="What database are you running, what environment, and what's the issue or goal?"></textarea>
-        </div>
-        <div style="position:absolute; left:-9999px;" aria-hidden="true">
-          <label for="website">Leave this field empty</label>
-          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-        </div>
-        <button type="submit" class="btn-submit">Send message</button>
-        <p id="contact-form-status" style="margin: 0.9rem 0 0; font-size: 0.85rem;"></p>
-      </form>
-      <script>
-        document.getElementById('contact-form').addEventListener('submit', async function (e) {
-          e.preventDefault();
-          var form = e.target;
-          var status = document.getElementById('contact-form-status');
-          var button = form.querySelector('button[type="submit"]');
-          var data = Object.fromEntries(new FormData(form).entries());
-
-          button.disabled = true;
-          button.textContent = 'Sending…';
-          status.textContent = '';
-
-          try {
-            var res = await fetch('/api/contact', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data),
-            });
-            var body = await res.json();
-            if (res.ok) {
-              status.style.color = 'var(--pine)';
-              status.textContent = "Thanks — we'll get back to you shortly.";
-              form.reset();
-            } else {
-              status.style.color = 'var(--red)';
-              status.textContent = body.error || 'Something went wrong. Please email us directly.';
-            }
-          } catch (err) {
-            status.style.color = 'var(--red)';
-            status.textContent = 'Something went wrong. Please email us directly.';
-          } finally {
-            button.disabled = false;
-            button.textContent = 'Send message';
-          }
-        });
-      </script>
-    </div>
+    <h2>Curious where this fits for you?</h2>
+    <p>Whether it's setting up an MCP server for your own team's AI tools or getting a second opinion on something an assistant already suggested, we're happy to talk it through.</p>
+    <a href="/#contact" class="btn btn-solid">Talk to us →</a>
   </div>
 </section>
 
@@ -574,7 +359,7 @@
       <li><a href="/services">Services</a></li>
       <li><a href="/ai">AI &amp; Automation</a></li>
       <li><a href="/about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="/#contact">Contact</a></li>
     </ul>
   </div>
 </footer>

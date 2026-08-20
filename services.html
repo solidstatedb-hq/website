@@ -218,7 +218,7 @@
   <div class="wrap masthead-nav">
     <ul class="n-links">
       <li><a href="/services" class="current">Services</a></li>
-      <li><a href="/#ai">AI &amp; Automation</a></li>
+      <li><a href="/ai">AI &amp; Automation</a></li>
       <li><a href="/about">About</a></li>
     </ul>
     <a href="/#contact" class="n-cta">Talk to us →</a>
@@ -229,7 +229,7 @@
   <div class="wrap">
     <div class="eyebrow"><b>—</b> WHAT WE DO</div>
     <h1>Work organised around how databases actually behave.</h1>
-    <p>Every engagement starts with understanding your system — not applying a generic playbook to it. Six services, each scoped to a specific kind of problem, all delivered by the people who do the work.</p>
+    <p>Every engagement starts with understanding your system — not applying a generic playbook to it. Seven services, each scoped to a specific kind of problem, all delivered by the people who do the work.</p>
   </div>
 </section>
 
@@ -272,17 +272,17 @@
       <div class="service-body">
         <div class="service-body-spacer"></div>
         <div class="service-desc">
-          <p>Query plans, index strategy, cost parameters, JIT, parallelism, vacuum tuning — the full picture, not a single knob turned in isolation. We read EXPLAIN ANALYZE output and tell you what's actually wrong, not what a configuration generator suggests.</p>
-          <p>This is ongoing or project-based work, scoped to your actual workload — a write-heavy OLTP system and an analytics warehouse get tuned very differently, and we treat them that way.</p>
-          <div class="service-tags"><span class="tag">EXPLAIN ANALYZE</span><span class="tag">pg_stat_statements</span><span class="tag">index strategy</span><span class="tag">autovacuum</span></div>
+          <p>Hands-on, manual diagnosis: cost parameters, JIT, parallelism, vacuum tuning — the full picture, not a single knob turned in isolation. We read EXPLAIN ANALYZE output ourselves and tell you what's actually wrong, without leaning on any automated advisor to do the thinking for us.</p>
+          <p>This is ongoing or project-based work, scoped to your actual workload — a write-heavy OLTP system and an analytics warehouse get tuned very differently, and we treat them that way. If you already have an automated tuning tool in place, that's covered separately below.</p>
+          <div class="service-tags"><span class="tag">EXPLAIN ANALYZE</span><span class="tag">pg_stat_statements</span><span class="tag">manual diagnosis</span><span class="tag">autovacuum</span></div>
         </div>
         <div class="service-includes">
           <span class="service-includes-label">What's covered</span>
           <ul>
             <li>Query plan analysis on your slowest, highest-volume queries</li>
-            <li>Index design — including partial and expression indexes</li>
+            <li>Cost-parameter and connection pooling calibration</li>
             <li>Autovacuum and bloat control tuned to your write pattern</li>
-            <li>Connection pooling and cost-parameter calibration</li>
+            <li>Hand-built indexes for cases too specific for a generic advisor</li>
           </ul>
         </div>
       </div>
@@ -364,6 +364,30 @@
     <div class="service-entry">
       <div class="service-entry-head">
         <span class="service-num">06</span>
+        <h2>Automated Tuning &amp; Index Recommendations</h2>
+        <span class="service-flag"></span>
+      </div>
+      <div class="service-body">
+        <div class="service-body-spacer"></div>
+        <div class="service-desc">
+          <p>Automated tuning and index-recommendation tools have gotten genuinely good — but knowing which one fits your workload, and whether to trust what it's telling you, still takes real PostgreSQL judgement. We help you select, configure, and validate the right tooling for your environment.</p>
+          <p>This isn't a hands-off "turn on autopilot" service. We review what an automated tool proposes against your actual workload before anything is applied, and we're vendor-neutral — the right answer is sometimes a specific commercial tool, sometimes an open-source approach, sometimes just a manually-applied index once we know what to look for.</p>
+          <div class="service-tags"><span class="tag">automated tuning</span><span class="tag">index recommendations</span><span class="tag">tool evaluation</span><span class="tag">vendor-neutral</span></div>
+        </div>
+        <div class="service-includes">
+          <span class="service-includes-label">What's covered</span>
+          <ul>
+            <li>Evaluating automated tuning and index-recommendation tools against your workload</li>
+            <li>Safe rollout — reviewing proposed changes before they reach production</li>
+            <li>Ongoing oversight so recommendations stay appropriate as your workload evolves</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-entry">
+      <div class="service-entry-head">
+        <span class="service-num">07</span>
         <h2>24/7 Emergency Support</h2>
         <span class="service-flag"></span>
       </div>
@@ -404,7 +428,7 @@
     </div>
     <ul class="footer-links">
       <li><a href="/services">Services</a></li>
-      <li><a href="/#ai">AI &amp; Automation</a></li>
+      <li><a href="/ai">AI &amp; Automation</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/#contact">Contact</a></li>
     </ul>
